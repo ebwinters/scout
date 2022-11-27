@@ -23,5 +23,13 @@ namespace scout.Controllers
         {
             return await _scoutRepository.getScouts();
         }
+
+        [HttpPost("CreateScout")]
+        [BasicAuth]
+        public async Task<ActionResult> CreateScout([FromBody] ScoutDbo scout)
+        {
+            await _scoutRepository.createScout(scout);
+            return Ok();
+        }
     }
 }

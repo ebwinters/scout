@@ -36,5 +36,13 @@ namespace Scout.Infrastructure
             }
             return scouts;
         }
+
+        public async Task createScout(ScoutDbo scout)
+        {
+            Database database = await _client.CreateDatabaseIfNotExistsAsync(_settings.DatabaseName);
+            Container container = database.GetContainer(_settings.ContainerName);
+
+            var query = await container.CreateItemAsync<ScoutDbo>(scout);
+        }
     }
 }
