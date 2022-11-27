@@ -12,13 +12,14 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<CosmosClient>(serviceProvider =>
 {
-    return new CosmosClient("AccountEndpoint=https://localhost:8081/;AccountKey=C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==");
+    var accountEndpoint = builder.Configuration.GetSection("CosmosDbClientSettings").GetValue<string>("AccountEndpoint");
+    return new CosmosClient(accountEndpoint);
 });
 
 var key = builder.Configuration.GetValue<string>("Key");
 builder.Services.AddSingleton<Settings>(new Settings() { Key = key });
 builder.Services.AddSingleton<CosmosDbContainerSettings>();
-builder.Services.Configure<CosmosDbContainerSettings>(builder.Configuration.GetSection("cosmosDbClientSettings"));
+builder.Services.Configure<CosmosDbContainerSettings>(builder.Configuration.GetSection("CosmosDbClientSettings"));
 builder.Services.AddScoped<ScoutRepository>();
 
 var app = builder.Build();
