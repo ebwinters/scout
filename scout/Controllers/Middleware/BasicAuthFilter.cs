@@ -54,9 +54,8 @@ namespace scout.Controllers.Middleware
 
         public bool IsAuthorized(AuthorizationFilterContext context, string key)
         {
-            return true;
-            //Settings settings = context.HttpContext.RequestServices.GetRequiredService<Settings>();
-            //return key == settings.Key;
+            Settings settings = context.HttpContext.RequestServices.GetRequiredService<Settings>();
+            return key == settings.Key;
         }
 
         private void ReturnUnauthorizedResult(AuthorizationFilterContext context)

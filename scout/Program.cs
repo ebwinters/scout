@@ -15,10 +15,9 @@ builder.Services.AddSingleton<CosmosClient>(serviceProvider =>
     return new CosmosClient("AccountEndpoint=https://localhost:8081/;AccountKey=C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==");
 });
 
-
-builder.Services.AddSingleton<Settings>();
+var key = builder.Configuration.GetValue<string>("Key");
+builder.Services.AddSingleton<Settings>(new Settings() { Key = key });
 builder.Services.AddSingleton<CosmosDbContainerSettings>();
-builder.Services.Configure<Settings>(builder.Configuration.GetSection("Key"));
 builder.Services.Configure<CosmosDbContainerSettings>(builder.Configuration.GetSection("cosmosDbClientSettings"));
 builder.Services.AddScoped<ScoutRepository>();
 
