@@ -1,4 +1,4 @@
-﻿namespace scout
+﻿namespace Scout.Api
 {
     public class Settings
     {
