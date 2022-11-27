@@ -39,8 +39,6 @@ builder.Services.AddSwaggerGen();
 
 var key = builder.Configuration.GetValue<string>("Key");
 builder.Services.AddSingleton<Settings>(new Settings() { Key = key });
-builder.Services.AddSingleton<CosmosDbContainerSettings>();
-builder.Services.Configure<CosmosDbContainerSettings>(builder.Configuration.GetSection("CosmosDbClientSettings"));
 
 var app = builder.Build();
 
