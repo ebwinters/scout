@@ -5,9 +5,9 @@ using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.DependencyInjection;
-using scout;
+using Scout.Api;
 
-namespace scout.Controllers.Middleware
+namespace Scout.Api.Api.Controllers.Middleware
 {
     public class BasicAuthFilter : IAuthorizationFilter
     {
@@ -25,7 +25,7 @@ namespace scout.Controllers.Middleware
         {
             try
             {
-                string authHeader = context.HttpContext.Request.Headers["Authorization"];
+                string authHeader = context.HttpContext.Request.Headers["Authorization"]!;
                 if (authHeader != null)
                 {
                     var authHeaderValue = AuthenticationHeaderValue.Parse(authHeader);
