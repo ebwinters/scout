@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Scout.Api.Api.Controllers.Middleware;
 
-namespace scout.Controllers.Middleware
+namespace Scout.Api.Controllers.Middleware
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class BasicAuthAttribute : TypeFilterAttribute
